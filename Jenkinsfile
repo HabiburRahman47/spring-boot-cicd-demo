@@ -1,10 +1,16 @@
 pipeline {
   agent any
+
+  tools {
+    maven 'MAVEN'
+    jdk 'JAVA_HOME'
+  }
   
   stages {
     stage('Clone Repo') {
       steps {
         echo "Cloning the project"
+        checkout scm
       }
     }
 
@@ -18,6 +24,7 @@ pipeline {
     stage('Test') {
       steps {
         echo "Testing the project"
+        sh 'mvn test'
       }
     }
 
